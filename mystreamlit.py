@@ -2,6 +2,7 @@
 
 import streamlit as st
 from gsheetsdb import connect
+import pandas as pd
 #from collections.abc import Iterable
 
 # Create a connection object.
@@ -18,6 +19,5 @@ def run_query(query):
 sheet_url = st.secrets["public_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-# Print results.
-for row in rows:
-    st.write(f"{row.name} has a :{row.pet}:")
+df_gsheet = pd.DataFrame(rows)
+st.write(df_gsheet)
